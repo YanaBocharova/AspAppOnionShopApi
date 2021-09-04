@@ -1,0 +1,31 @@
+﻿@using AspAppOnionShop.Models.Categories
+@model CategoriesIndexViewModel
+
+<div class="a-link">
+    <a asp-action="Create">New Category</a>
+    <a asp-controller="Home" asp-action="Index">Home</a>
+    <a asp-controller="Products" asp-action="Index">Products</a>
+</div>
+
+
+@if (Model.Categories.Count > 0)
+{
+
+    <div class="prod-list">
+
+        @foreach (var category in Model.Categories)
+        {
+             <div class="prod-list-info">
+                 @await Html.PartialAsync("_Category", category)
+                 <div class="person-actions">
+                     <a asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                     <a asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                 </div>
+             </div>
+          }
+    </div> 
+ }
+ else
+ {
+ <h4>Categories list is empty</h4>
+ }
